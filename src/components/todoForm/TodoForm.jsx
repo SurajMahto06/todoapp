@@ -2,6 +2,8 @@ import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
 import { db } from "../../firebaseConfig";
 import { toast } from "react-toastify";
+import { IoMdAdd } from "react-icons/io";
+import { serverTimestamp } from "firebase/firestore";
 
 const TodoForm = () => {
   const [todoForm, setTodoForm] = useState({
@@ -19,6 +21,7 @@ const TodoForm = () => {
           title,
           description,
           completed: false,
+          createdAt: serverTimestamp(),
         });
         toast.success("Task added successfully! ✅");
 
@@ -65,8 +68,11 @@ const TodoForm = () => {
             value={todoForm.description}
             onChange={handleChange}
           />
-          <button className="cursor-pointer border p-2" type="submit">
-            Add Task
+          <button
+            className="flex items-center gap-1 cursor-pointer border p-2"
+            type="submit"
+          >
+            <IoMdAdd fontSize={20} color="green" /> Add Task
           </button>
         </div>
       </form>
